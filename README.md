@@ -193,12 +193,3 @@ var contents = await playwrightService.GetNewsContent(newsItems);
 禁止用于任何非法用途。
 
 ---
-
-如果你愿意，我可以再帮你：
-
-* 📈 加一个 **爬取进度条**
-* 🔄 改成 **多 Page 并发爬**
-* 🧠 自动去重 / 相似新闻合并
-* 📊 输出摘要 / 关键词
-
-这套代码已经是**工程级爬虫的雏形**了。
