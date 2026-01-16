@@ -1,4 +1,7 @@
-﻿
+﻿下面是一份**可以直接放到你项目根目录的 `README.md`**，内容是按你现在这套 **Playwright + Edge + 百度热搜抓取** 的真实代码来写的，不虚、不夸，偏工程说明型。
+
+---
+
 # BaiduSpider
 
 一个基于 **Microsoft Playwright（C#）** 的百度热搜新闻抓取工具，
