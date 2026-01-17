@@ -1,4 +1,5 @@
-﻿using Spider.Common.Models.Baidu;
+﻿using Spider.Common.Models;
+using Spider.Common.Models.Baidu;
 using Spider.Common.Services.Baidu;
 
 namespace BaiduSpider
@@ -6,7 +7,7 @@ namespace BaiduSpider
     class Program
     {
         private static readonly BaiduSpiderService BaiduSpiderService = new();
-        private static readonly FileService _fileService = new();
+        private static readonly FileService _fileService = new("./Baidu");
         
         static async Task Main(string[] args)
         {
@@ -45,7 +46,7 @@ namespace BaiduSpider
                 var newsContents = await BaiduSpiderService
                     .GetNewsContent(newsItems);
 
-                await _fileService.SaveAllContentToJson(newsContents);
+                await _fileService.SaveAllContentToJson(newsContents, SpiderSource.Baidu);
                 Console.WriteLine("获取成功，文件保存在当前目录下newsContent.json");
             }
             catch (Exception ex)

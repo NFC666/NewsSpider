@@ -35,8 +35,9 @@ public class PaperSpiderService : PlaywrightService
         var json = JsonConvert.SerializeObject(requestBody);
         var content = new StringContent(json, Encoding.UTF8, "application/json");
         var response = await _httpClient.PostAsync(url, content);
+        var jsonResp = await response.Content.ReadAsStringAsync();
         var newsCovers = JsonConverterHelper
-            .FromJsonListToList<NewsCover>(await response.Content.ReadAsStringAsync()
+            .FromJsonListToList<NewsCover>(jsonResp
                 , "data.list");
         foreach (var newsCover in newsCovers)
         {
