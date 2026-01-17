@@ -3,5 +3,6 @@
 public enum SpiderSource
 {
     Baidu,
-    ThePaper
+    ThePaper,
+    ThePaperSearch
 }

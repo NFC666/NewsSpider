@@ -11,8 +11,12 @@ public class ThePaperSpider
     {
 
         await _paperSpiderService.InitializeAsync();
-        var res = await _paperSpiderService.GetNewsByPageNumAsync(1);
-
-
+        // var res = await _paperSpiderService.GetNewsByPageNumAsync(1);
+        var res = await _paperSpiderService
+            .GetNewsByKeyWordsAsync("伊朗");
+        foreach (var r in res)
+        {
+            Console.WriteLine(r.NewsContent);
+        }
     }
 }

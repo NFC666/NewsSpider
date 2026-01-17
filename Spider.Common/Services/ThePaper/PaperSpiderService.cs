@@ -16,14 +16,28 @@ public class PaperSpiderService : PlaywrightService
 
     private static readonly string Directory = "./ThePaper";
     private FileService _fileService = new(Directory);
-    
-    public async Task<List<News>> GetNewsByPageNumAsync(int pageNum, int pageSize = 20)
+
+    public async Task<List<News>> GetNewsByKeyWordsAsync(
+        string word,
+        int pageNum = 1,
+        int pageSize = 10)
     {
         var news = new List<News>();
-        var json = await GetNewsJsonAsync(pageNum, pageSize);
+        string url = "search/web/news";
+        var requestBody = new
+        {
+            word,
+            pageNum,
+            pageSize,
+            searchType = 1,
+            orderType =3,
+        };
+        var json = JsonConvert.SerializeObject(requestBody);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+        var response = await _httpClient.PostAsync(url, content);
         var newsCovers = JsonConverterHelper
-            .FromJsonListToList<NewsCover>(json);
-        
+            .FromJsonListToList<NewsCover>(await response.Content.ReadAsStringAsync()
+                , "data.list");
         foreach (var newsCover in newsCovers)
         {
             var newsItem = new News
@@ -32,19 +46,44 @@ public class PaperSpiderService : PlaywrightService
             };
             newsItem.NewsContent = await GetNewsContentAsync(newsItem.Cover);
             news.Add(newsItem);
-            await _fileService.SaveAllContentToJson(news,SpiderSource.ThePaper);
+            await _fileService.SaveAllContentToJson(news
+                , SpiderSource.ThePaperSearch);
             Console.WriteLine($"新闻信息已经保存在当前目录下的{Directory}内");
         }
         return news;
+
     }
-    
-    private async Task<string> GetNewsJsonAsync(int pageNum,int pageSize = 20)
+
+    public async Task<List<News>> GetNewsByPageNumAsync(int pageNum, int pageSize = 20)
+    {
+        var news = new List<News>();
+        var json = await GetNewsJsonAsync(pageNum, pageSize);
+        var newsCovers = JsonConverterHelper
+            .FromJsonListToList<NewsCover>(json, "data.list");
+
+        foreach (var newsCover in newsCovers)
+        {
+            var newsItem = new News
+            {
+                Cover = newsCover
+            };
+            newsItem.NewsContent = await GetNewsContentAsync(newsItem.Cover);
+            news.Add(newsItem);
+            await _fileService.SaveAllContentToJson(news, SpiderSource.ThePaper);
+            Console.WriteLine($"新闻信息已经保存在当前目录下的{Directory}内");
+        }
+
+        return news;
+    }
+
+    private async Task<string> GetNewsJsonAsync(int pageNum, int pageSize = 20)
     {
         var url = "contentapi/nodeCont/getByChannelId";
         var requestBody = new
         {
             channelId = "25950",
-            excludeContIds = new long[] { 32405966, 32406446, 32405967, 32406027, 32406021, 32406050, 32405953, 32405919, 32406429, 32407254 },
+            excludeContIds = new long[]
+                { 32405966, 32406446, 32405967, 32406027, 32406021, 32406050, 32405953, 32405919, 32406429, 32407254 },
             // listRecommendIds = new long[] { 32406454, 32406429, 32406050, 32405919 },
             listRecommendIds = new long[] { 32406454, 32406429, 32406050, 32405919 },
             pageNum,
@@ -52,7 +91,7 @@ public class PaperSpiderService : PlaywrightService
             province = (string?)null,
         };
         var json = JsonConvert.SerializeObject(requestBody);
-        
+
         var content = new StringContent(json, Encoding.UTF8, "application/json");
         var response = await _httpClient.PostAsync(url, content);
 
@@ -75,15 +114,14 @@ public class PaperSpiderService : PlaywrightService
         // 模糊选择 class 名含 "cententWrap"
         var contentDiv = await _page
             .QuerySelectorAsync("div[class*='cententWrap']");
-        
+
         if (contentDiv == null)
         {
             return string.Empty;
         }
+
         // 获取 div 内的全部文字
         var textContent = await contentDiv.InnerTextAsync();
         return textContent;
-
-
     }
 }
