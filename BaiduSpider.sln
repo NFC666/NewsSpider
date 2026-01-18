@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThePaperSpider", "ThePaperS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkerCnSpider", "WorkerCnSpider\WorkerCnSpider.csproj", "{35606D29-C68E-44FD-8FA9-196466CBFD30}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoeSpider", "MoeSpider\MoeSpider.csproj", "{2022570C-DF98-4CA9-A418-05AF6B9568B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewsSpider", "NewsSpider\NewsSpider.csproj", "{24441BE2-2F15-47E5-A067-B6CEC2A938ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,13 @@ Global
 		{35606D29-C68E-44FD-8FA9-196466CBFD30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35606D29-C68E-44FD-8FA9-196466CBFD30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35606D29-C68E-44FD-8FA9-196466CBFD30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2022570C-DF98-4CA9-A418-05AF6B9568B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2022570C-DF98-4CA9-A418-05AF6B9568B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2022570C-DF98-4CA9-A418-05AF6B9568B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2022570C-DF98-4CA9-A418-05AF6B9568B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24441BE2-2F15-47E5-A067-B6CEC2A938ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24441BE2-2F15-47E5-A067-B6CEC2A938ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24441BE2-2F15-47E5-A067-B6CEC2A938ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24441BE2-2F15-47E5-A067-B6CEC2A938ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

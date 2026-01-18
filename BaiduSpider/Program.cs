@@ -1,5 +1,6 @@
 ﻿using Spider.Common.Models;
 using Spider.Common.Models.Baidu;
+using Spider.Common.Services;
 using Spider.Common.Services.Baidu;
 
 namespace BaiduSpider

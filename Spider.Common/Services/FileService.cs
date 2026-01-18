@@ -1,8 +1,7 @@
 ﻿using System.Text.Json;
 using Spider.Common.Models;
-using Spider.Common.Models.Baidu;
 
-namespace Spider.Common.Services.Baidu;
+namespace Spider.Common.Services;
 
 public class FileService
 {

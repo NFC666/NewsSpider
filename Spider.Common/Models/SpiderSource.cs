@@ -5,5 +5,6 @@ public enum SpiderSource
     Baidu,
     ThePaper,
     ThePaperSearch,
-    WorkerCn
+    WorkerCn,
+    Moe
 }
